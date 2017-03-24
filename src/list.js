@@ -8,20 +8,17 @@ export default class List extends React.Component {
 		listArr: React.PropTypes.array,
 	}
 	static defaultProps = {
-		listArr: [{ 'name': 'Item 1' }, { 'name': 'Item 2' }, { 'name': 'Item 3' }]
+		listArr: { 'name': 'Item 1' }
 	}
 	render() {
-		var _html = [];
-		this.props.listArr.forEach(function(v, i) {
-			if(v.needArrow & v.needArrow == true) {
-				var _li = <li className='tnt-list-cell' key={i}>
-				<a className='tnt-nav-right' href={v.link?v.link:'javascript:void(0)'} onClick={v.onClick?v.onClick:null}>{v.name}</a>
+		var listArr=this.props.listArr;
+		if(listArr.needArrow & listArr.needArrow == true) {
+			var _html = <li className='tnt-list-cell'>
+				<a className='tnt-nav-right' href={listArr.link?listArr.link:'javascript:void(0)'} onClick={listArr.onClick?listArr.onClick:null}>{listArr.name}</a>
 				</li>
-			} else {
-				var _li = <li className='tnt-list-cell' key={i}>{v.name}</li>
-			}
-			_html.push(_li);
-		})
+		} else {
+			var _html = <li className='tnt-list-cell'>{listArr.name}</li>
+		}
 
 		return(
 			<ul className='tnt-list'>{_html}</ul>
